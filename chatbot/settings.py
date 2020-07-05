@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'chat',
-    'channels'
+    'channels',
+    'channels_redis'
 ]
 
 MIDDLEWARE = [
@@ -123,3 +124,12 @@ STATIC_URL = '/static/'
 
 # Channels
 ASGI_APPLICATION = 'chatbot.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
+
